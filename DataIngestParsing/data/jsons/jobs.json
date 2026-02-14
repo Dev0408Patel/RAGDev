@@ -1,0 +1,34 @@
+{
+  "listings": [
+    {
+      "company": "NVIDIA",
+      "position": "ML Engineer",
+      "location": "Santa Clara, CA",
+      "details": {
+        "salary": 180000,
+        "sponsorship": "H1B/OPT",
+        "requirements": "Python, PyTorch, CUDA"
+      }
+    },
+    {
+      "company": "Google",
+      "position": "Software Engineer",
+      "location": "Bloomington, IN",
+      "details": {
+        "salary": 165000,
+        "sponsorship": "H1B/OPT",
+        "requirements": "C++, Distributed Systems"
+      }
+    },
+    {
+      "company": "TechStart",
+      "position": "Frontend Dev",
+      "location": "Remote",
+      "details": {
+        "salary": 120000,
+        "sponsorship": "None",
+        "requirements": "React, TypeScript"
+      }
+    }
+  ]
+}
