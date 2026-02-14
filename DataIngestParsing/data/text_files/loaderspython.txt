@@ -1,0 +1,78 @@
+In LangChain version 1.2.10, the langchain_community.document_loaders module provides a vast array of classes to bring data into your RAG pipelines. All these loaders follow a consistent interface inherited from the BaseLoader class.
+
+Below are the primary "Text" related loaders from the community package, formatted as you requested:
+
+1. TextLoader
+function name: TextLoader
+
+use case: Ideal for loading single, plain-text files (e.g., .txt, .md, .py) into a single Document object.
+
+how to use: loader = TextLoader("path/to/file.txt", encoding="utf-8") followed by docs = loader.load().
+
+alternative: UnstructuredFileLoader (if the file has complex formatting or isn't strictly plain text).
+
+variations: Supports custom encoding and autodetect_encoding=True for handling various file formats.
+
+2. DirectoryLoader
+function name: DirectoryLoader
+
+use case: Used to load all files within a specific folder that match a pattern (e.g., all .txt files in a "data/" folder).
+
+how to use: loader = DirectoryLoader("path/", glob="**/*.txt", loader_cls=TextLoader)
+
+alternative: Writing a custom os.listdir() loop and manually calling TextLoader on each file.
+
+variations: use_multithreading=True (for faster loading of large directories) and show_progress=True.
+
+3. WebBaseLoader
+function name: WebBaseLoader
+
+use case: Scraping and loading text content directly from a URL or a list of URLs.
+
+how to use: loader = WebBaseLoader("https://example.com")
+
+alternative: SeleniumURLLoader or PlaywrightURLLoader (for JavaScript-heavy sites that WebBaseLoader can't render).
+
+variations: bs_kwargs (to pass custom parameters to BeautifulSoup for specific HTML parsing).
+
+4. CSVLoader
+function name: CSVLoader
+
+use case: Loading tabular data where each row of the CSV is converted into a separate Document.
+
+how to use: loader = CSVLoader(file_path="data.csv", csv_args={"delimiter": ","})
+
+alternative: Loading with pandas and then using DataFrameLoader.
+
+variations: source_column (to specify which column should be used as the 'source' in metadata).
+
+5. PyPDFLoader
+function name: PyPDFLoader
+
+use case: The go-to for standard PDF files; it creates one Document object per page of the PDF.
+
+how to use: loader = PyPDFLoader("manual.pdf")
+
+alternative: UnstructuredPDFLoader or PyMuPDFLoader (often faster and better at layout analysis).
+
+variations: headers (to add custom headers if fetching the PDF from a URL).
+
+6. JSONLoader
+function name: JSONLoader
+
+use case: Loading data from JSON or JSONL files using a jq schema to pick specific fields as the page content.
+
+how to use: loader = JSONLoader(file_path="data.json", jq_schema=".messages[].text")
+
+alternative: JSONLinesLoader (specifically for .jsonl formats).
+
+variations: text_content=False (to load the entire JSON object as a string if no schema is provided).
+
+Core Methods Shared by All Loaders
+Every class listed above implements the following core methods:
+
+.load(): Synchronously loads the data into a list of Document objects.
+
+.lazy_load(): Returns a generator that yields documents one by one—critical for you when handling large datasets at Project 990 to avoid memory crashes.
+
+.load_and_split(): Loads the documents and immediately applies a TextSplitter to chunk them.

@@ -1,0 +1,94 @@
+
+
+The os library is one of Python’s most essential modules for system-level automation. While it is incredibly powerful, modern Python development often favors the pathlib module for its object-oriented approach.
+
+Below are the most frequently used functions in the os library, formatted as requested:
+
+1. os.getcwd()
+function name: os.getcwd() (Get Current Working Directory)
+
+use case: To identify the absolute path of the folder where the Python script is currently executing.
+
+how to use: current_path = os.getcwd()
+
+alternative: pathlib.Path.cwd()
+
+variations: os.getcwdb() (Returns the path as a byte string instead of a Unicode string).
+
+2. os.chdir()
+function name: os.chdir(path) (Change Directory)
+
+use case: To move the context of the script to a different folder so you can access files using relative paths.
+
+how to use: os.chdir('/path/to/new/folder')
+
+alternative: Using pathlib.Path objects to reference files directly without changing the global directory state.
+
+variations: os.fchdir(fd) (Changes directory using a file descriptor).
+
+3. os.listdir()
+function name: os.listdir(path='.')
+
+use case: To retrieve a list of all files and subdirectories within a specific folder.
+
+how to use: files = os.listdir('.')
+
+alternative: pathlib.Path.iterdir() (Returns an iterator of Path objects instead of a list of strings).
+
+variations: os.scandir() (A more efficient version that returns an iterator of DirEntry objects containing file metadata).
+
+4. os.mkdir() & os.makedirs()
+function name: os.mkdir(path) / os.makedirs(path)
+
+use case: mkdir creates a single folder; makedirs creates the entire directory tree (recursive).
+
+how to use: os.makedirs('logs/2026/february', exist_ok=True)
+
+alternative: pathlib.Path.mkdir(parents=True, exist_ok=True)
+
+variations: Adding mode (e.g., 0o777) to set folder permissions during creation.
+
+5. os.remove() & os.rmdir()
+function name: os.remove(path) / os.rmdir(path)
+
+use case: remove deletes a file; rmdir deletes an empty directory.
+
+how to use: os.remove('temp_file.txt')
+
+alternative: pathlib.Path.unlink() (for files) or shutil.rmtree() (for non-empty folders).
+
+variations: os.unlink() is a direct alias for os.remove().
+
+6. os.rename()
+function name: os.rename(src, dst)
+
+use case: To rename a file or directory, or move it to a different location on the same partition.
+
+how to use: os.rename('old_name.txt', 'new_name.txt')
+
+alternative: os.replace() (Safer, as it handles overwriting cross-platform more consistently) or pathlib.Path.rename().
+
+variations: os.renames() (Recursive version that also creates/deletes intermediate directories).
+
+7. os.environ
+function name: os.environ (Mapping object)
+
+use case: To access, set, or delete system environment variables (like API keys or PATH).
+
+how to use: api_key = os.environ.get('SECRET_KEY')
+
+alternative: os.getenv('KEY', 'default_value') (Better for avoiding KeyError if the variable is missing).
+
+variations: os.environb (Handles environment variables as bytes).
+
+8. os.path.join()
+function name: os.path.join(*paths)
+
+use case: To combine path components into one string using the correct separator for the current OS (/ for Mac/Linux, \ for Windows).
+
+how to use: full_path = os.path.join('user', 'documents', 'file.txt')
+
+alternative: The / operator in pathlib (e.g., Path('user') / 'docs' / 'file.txt').
+
+variations: os.path.sep (The string constant for the system separator).
+    
